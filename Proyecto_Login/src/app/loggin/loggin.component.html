@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loggin Users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">  
+</head>
+<body >
+
+    <h1 style="text-align: center;">Loggin</h1>
+    
+    <div style="background-color:  #da6812 ">
+        <main class="container align-center p-5">
+            <form  id="loginForm" method="GET" >
+      
+         <div class="loggin">
+            <div class="mb-3">
+                <label for="emailInput" class="form-label">Email</label>
+                <input type="email" class="form-control" id="emailInput"name="email" required>
+                <span id="emailInput-error" class="error-message"></span>
+            </div>
+            <div class="mb-3">
+                <label for="passwordInput" class="form-label">Password</label>
+                <input type="password" class="form-control" id="passwordInput" name="password" required>
+                <span id="contraseñaInput-error" class="error-message"></span>
+    
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" dlass="form-check-input" id="rememberCheck" name="remember">
+                <label class="form-check-label" for="rememberCheck">Mantener sesión iniciada</label>
+            </div>
+            <div>
+                <p>Create  una cuenta <a routerLink="/registrar" style="color: white">Registrarse</a></p>
+            </div>
+            <button type="submit" class="btn btn-primary">Acceder</button>
+        </div>
+        </form>
+        </main>  
+    </div>
+    <!-- <H2>{{mensaje}}</H2>  -->  <!--Para llevar a cabo la interpolación utilizamos 
+        el nombre de la variable que esta en la clase del componente(loggin.compnent.ts ) -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
