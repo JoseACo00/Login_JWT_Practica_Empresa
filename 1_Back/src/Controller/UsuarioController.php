@@ -45,6 +45,9 @@ class UsuarioController extends AbstractController
 
 // COMO METER DEL FROM AL ALGO ...
 
+
+
+
 //CON ESTO GUARDA SE  UN OBJETO EN LA BASE DE DATOS
 
 //Define la ruta del endpoint para crear un nuevo usuario mediante una solicitud POST
@@ -54,19 +57,19 @@ class UsuarioController extends AbstractController
         //de las primeras coasas
         $data = json_decode($request->getContent(), true);
 
-        // Crea una nueva instancia de la entidad User
+        // Crea una nueva instancia de la entidad Usuario
         $Usuario = new Usuario();
-        // Crea un formulario utilizando personaForm y la nueva instancia de User
-        $personaForm = $this->createForm(UsuarioForm::class, $Usuario);
+        // Crea un formulario utilizando usuarioForm y la nueva instancia de User
+        $usuarioForm = $this->createForm(UsuarioForm::class, $Usuario);
 
-        $personaForm->submit($data);
+        $usuarioForm->submit($data);
         // Maneja la solicitud HTTP para el formulario
-       // $personaForm->handleRequest($request);
+       // $usuarioForm->handleRequest($request);
 
         // Verifica si el formulario ha sido enviado y si los datos son válidos
-        if( $personaForm->isValid()){
+        if( $usuarioForm->isValid()){
             // Obtiene los datos del formulario
-            $usuario = $personaForm->getData();
+            $usuario = $usuarioForm->getData();
             // Obtiene el EntityManager para interactuar con la base de datos
             $em =$this->getDoctrine()->getManager(); // ALmancenar objeto en la base de datos
             $em ->persist($usuario);
