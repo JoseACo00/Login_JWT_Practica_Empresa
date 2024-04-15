@@ -54,31 +54,40 @@ class UsuarioController extends AbstractController
     #[Route('/usuario_nuevo', name: 'add_usuario', methods: ['POST'])]
     public function CrearUsuario(Request $request)
     {
-        //de las primeras coasas
+        // Decodificar los datos JSON de la solicitud
         $data = json_decode($request->getContent(), true);
 
         // Crea una nueva instancia de la entidad Usuario
         $Usuario = new Usuario();
-        // Crea un formulario utilizando usuarioForm y la nueva instancia de User
+
+        // Crea un formulario utilizando UsuarioForm y la nueva instancia de Usuario
         $usuarioForm = $this->createForm(UsuarioForm::class, $Usuario);
 
+        // Somete los datos al formulario
         $usuarioForm->submit($data);
-        // Maneja la solicitud HTTP para el formulario
-       // $usuarioForm->handleRequest($request);
 
-        // Verifica si el formulario ha sido enviado y si los datos son válidos
-        if( $usuarioForm->isValid()){
-            // Obtiene los datos del formulario
-            $usuario = $usuarioForm->getData();
-            // Obtiene el EntityManager para interactuar con la base de datos
-            $em =$this->getDoctrine()->getManager(); // ALmancenar objeto en la base de datos
-            $em ->persist($usuario);
-            $em ->flush();// Guarda los cambios en la base de datos
+        if ($usuarioForm->isValid()) {
+            // Verifica si el correo electrónico ya existe en la base de datos
+            $existingUser = $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(['Email' => $Usuario->getEmail()]);
 
+            // Si el correo electrónico ya existe, devuelve un mensaje de error
+            if ($existingUser) {
+                return new JsonResponse(['error' => 'El correo electrónico pertenece a otro usuario'], JsonResponse::HTTP_BAD_REQUEST);
+            }
+            // Obtener el EntityManager para interactuar con la base de datos
+            $em = $this->getDoctrine()->getManager();
+
+            // Persistir el nuevo usuario en la base de datos
+            $em->persist($Usuario);
+            $em->flush();
+
+            // Mensaje de éxito y respuesta JSON
             $this->addFlash('success', 'El usuario ha sido creado exitosamente');
             return new JsonResponse(['status' => 'Usuario creado exitosamente'], JsonResponse::HTTP_CREATED);
         }
+        // Si los datos del formulario no son válidos, devuelve un mensaje de error
         return new JsonResponse(['error' => 'Los datos del usuario no son válidos'], JsonResponse::HTTP_BAD_REQUEST);
+
     }
 
     //-------------------------------------------------

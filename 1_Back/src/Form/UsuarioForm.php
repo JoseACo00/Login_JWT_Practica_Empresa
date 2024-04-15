@@ -33,8 +33,7 @@ class UsuarioForm extends AbstractType
                        'maxMessage' => 'El nombre de usuario es demasido largo ',
                    ])
                ]
-           ])
-           ->add('email', TextType::class, [
+           ])->add('email', TextType::class, [
                'required' => true,
                'constraints' => [
                    new NotBlank([
@@ -43,6 +42,7 @@ class UsuarioForm extends AbstractType
 
                ]
            ])
+
            ->add('phone', TextType::class, [
                'required' => true,
                'constraints' => [
