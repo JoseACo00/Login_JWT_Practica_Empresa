@@ -42,5 +42,39 @@ public enviarData() {
   })
 }
 
+public enviarData2() {
+  this.CreateService.createUser(this.FormCreate.value)
+    .subscribe(
+      (response) => {
+        console.log('Formulario Enviado:', response);
+        // Puedes agregar aquí lógica adicional después de enviar el formulario
+      },
+      (error) => {
+        console.error('Error al enviar el formulario:', error);
+        // Puedes manejar el error aquí, por ejemplo, mostrando un mensaje al usuario
+      }
+    ); this.router.navigate(['loggin']);
+  }
+//FUNCION PARA ENVIAR LOS DATOS AL ENDPOINT
+//NECESITA ESTAR EL SYMFONY OPEN
+//FALLA EL CORSE
+
+// public enviarData() {
+//   this.CreateService.post('http://localhost:8000/usuario_nuevo', this.FormCreate.value)
+//   .subscribe(respuesta => {
+//     console.log('Usuario creado');
+//   })
+// }
+
+
+//ASI TAMBIEN FUNCIONA ******
+//---------------------------
+// public envidarData2(){
+//   this.CreateService.saveUserNew(this.FormCreate.value).subscribe((result)=>{
+//     console.log(result);
+//   })
+// }
+
+//---------------------------------------
 
 }
