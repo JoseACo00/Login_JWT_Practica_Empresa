@@ -4,55 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">  
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
-   
-    <section class="vh-100 gradient-custom">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card bg-dark text-white" style="border-radius: 2rem;">
-                        <div class="card-body p-5 text-center">
-                            <div class="mb-md-5 mt-md-4 pb-5">
-                              <h1 style="color: blanchedalmond;">Registro  Para Loggin</h1>
-                              
-                              <form (ngSubmit)="CreateUser()" #form="ngForm" method="POST">
 
-                                  <div class="form-outline form-white mb-4">
-                                      <label class="form-label" for="name">Nombre</label>
-                                      <input id="name" name="name" class="form-control" [(ngModel)]="user.name" required placeholder="Introduce el nombre" type="text">
-                                  </div>
-                              
-                                  <div class="form-outline form-white mb-4">
-                                      <label class="form-label" for="email">Email</label>
-                                      <input id="email" name="email" class="form-control" [(ngModel)]="user.email" required placeholder="Introduce el correo" type="email">
-                                  </div>
-                              
-                                  <div class="form-outline form-white mb-4">
-                                      <label class="form-label" for="password">Contraseña</label>
-                                      <input id="password" name="password" class="form-control" [(ngModel)]="user.password" placeholder="Introduce la contraseña" type="password">
-                                  </div>
-                              
-                                  <div class="form-outline form-white mb-4">
-                                      <label class="form-label" for="telefono">Teléfono</label>
-                                      <input id="telefono" name="telefono" class="form-control" [(ngModel)]="user.telefono" placeholder="Introduce el teléfono" type="text">
-                                  </div>
-                              
-                                  <button type="submit" class="btn btn-primary">Registrar</button>
-                              </form>
-                            </div>
-                            <div>
-                              <p class="mb-0">Si tienes una cuenta ya  <a routerLink="/loggin" class="text-white-50 fw-bold">Iniciar sesión</a>
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
+  <div class="createForm">
+    <form [formGroup]="FormCreate" (ngSubmit)="enviarData()">
+      <h1>Registrate</h1>
+  <div class="mb-5 form-check">
+      <label for="name" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="name" name="name" formControlName="name" placeholder="">
+      <div *ngIf="FormCreate.get('name')?.touched && FormCreate.get('name')?.errors?.['required']" class="alert ">Este campo es requerido</div>
+      <div *ngIf="FormCreate.get('name')?.touched && FormCreate.get('name')?.errors?.['hasNumbers']" class="alert ">El nombre no puede contener números</div>
+      <div *ngIf="FormCreate.get('name')?.touched && FormCreate.get('name')?.errors?.['minlength']" class="alert ">El nombre debe ser minimo de 3 letras</div>
+      <div *ngIf="FormCreate.get('name')?.touched && FormCreate.get('name')?.errors?.['maxlength']" class="alert ">El nombre debe ser máximo  de 30 letras</div>
+      <div *ngIf="FormCreate.get('name')?.touched && FormCreate.get('name')?.errors?.['pattern']" class="alert ">Solo puede tener letras este campo</div>
+  </div>
+
+  <div class="mb-5 form-check">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" formControlName="email">
+      <div *ngIf="FormCreate.get('email')?.touched && FormCreate.get('email')?.errors?.['required']" class="alert ">Este campo es requerido</div>
+      <div *ngIf="FormCreate.get('email')?.touched && FormCreate.get('email')?.errors?.['pattern']" class="alert ">El email debe tener un formato correcto ej:Rmd14@gmail.es</div>
+
+  </div>
+
+  <div class="mb-5 form-check">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" formControlName="password">
+      <div *ngIf="FormCreate.get('password')?.touched && FormCreate.get('password')?.errors?.['required']" class="alert ">La contraseña es obligatoria</div>
+      <div *ngIf="FormCreate.get('password')?.touched && FormCreate.get('password')?.errors?.['minlength']" class="alert ">El password debe ser minimo de 6 Caracteres</div>
+      <div *ngIf="FormCreate.get('password')?.touched && FormCreate.get('password')?.errors?.['maxlength']" class="alert ">El password debe tener maximo 30 Caracteres</div>
+  </div>
+
+  <div class="mb-5 form-check">
+      <label for="phone" class="form-label">Teléfono</label>
+      <input type="text" class="form-control" id="phone" name="phone" formControlName="phone">
+      <div *ngIf="FormCreate.get('phone')?.touched && FormCreate.get('phone')?.errors?.['required']" class="alert ">El teléfono es obligatorio</div>
+      <div *ngIf="FormCreate.get('phone')?.touched && FormCreate.get('phone')?.errors?.['minlength']" class="alert ">El teléfono debe tener al menos 6 números</div>
+      <div *ngIf="FormCreate.get('phone')?.touched && FormCreate.get('phone')?.errors?.['maxlength']" class="alert ">El teléfono no debe tener más de 12 números</div>
+      <div *ngIf="FormCreate.get('phone')?.touched && FormCreate.get('phone')?.errors?.['pattern']"  class="alert ">Solo se admiten números</div>
+  </div>
+
+  <div class="d-grid gap-2 col-4 float-end">
+      <button type="submit" [disabled]="FormCreate.invalid"  class="btn">Registrarse</button>
+  </div>
+  <div class="user-loggin">
+    <p>¿Ya tienes cuenta?<a href="loggin">  Inicia sesión</a></p>
+  </div>
+</form>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>

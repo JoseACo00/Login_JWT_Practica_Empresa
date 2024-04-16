@@ -50,8 +50,8 @@ class UsuarioForm extends AbstractType
                        'message' => 'Por favor ingresa tu número de teléfono'
                    ]),
                    new Length([
-                       'min' => 10,
-                       'max' => 15,
+                       'min' =>  6,
+                       'max' => 12,
                        'minMessage' => 'El número de teléfono debe tener al menos {{ limit }} caracteres',
                        'maxMessage' => 'El número de teléfono no puede tener más de {{ limit }} caracteres'
                    ]),

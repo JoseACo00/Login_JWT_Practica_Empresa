@@ -6,28 +6,33 @@ import { AppComponent } from './app.component';
 
 import { LogginComponent } from './loggin/loggin.component';
 import { BannerComponent } from './banner/banner.component';
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegistrarComponent } from './registrar/registrar.component';
+import { InicioComponent } from './inicio/inicio.component';
 //INICIO DE SERVICIOS
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
     LogginComponent,
     BannerComponent,
-    
+    RegistrarComponent,
+    InicioComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-  
+
 
   ],
   providers: [
-   
+
   ],
   bootstrap: [AppComponent]
 })
