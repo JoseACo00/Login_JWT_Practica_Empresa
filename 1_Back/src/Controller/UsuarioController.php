@@ -74,6 +74,13 @@ class UsuarioController extends AbstractController
             if ($existingUser) {
                 return new JsonResponse(['error' => 'El correo electrónico pertenece a otro usuario'], JsonResponse::HTTP_BAD_REQUEST);
             }
+            // Verifica si el número de teléfono ya existe en la base de datos
+            $existingPhoneUser = $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(['Phone' => $Usuario->getPhone()]);
+
+            // Si el número de teléfono ya existe, devuelve un mensaje de error
+            if ($existingPhoneUser) {
+                return new JsonResponse(['error' => 'El número de teléfono pertenece a un usuario '], JsonResponse::HTTP_BAD_REQUEST);
+            }
             // Obtener el EntityManager para interactuar con la base de datos
             $em = $this->getDoctrine()->getManager();
 
