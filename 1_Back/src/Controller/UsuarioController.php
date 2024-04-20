@@ -68,19 +68,21 @@ class UsuarioController extends AbstractController
 
         if ($usuarioForm->isValid()) {
             // Verifica si el correo electrónico ya existe en la base de datos
-            $existingUser = $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(['Email' => $Usuario->getEmail()]);
+            $existingEmailUser = $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(['Email' => $Usuario->getEmail()]);
 
             // Si el correo electrónico ya existe, devuelve un mensaje de error
-            if ($existingUser) {
-                return new JsonResponse(['error' => 'El correo electrónico pertenece a otro usuario'], JsonResponse::HTTP_BAD_REQUEST);
+            if ($existingEmailUser) {
+                return new JsonResponse(['error' => 'El correo electrónico ya está en uso'], JsonResponse::HTTP_BAD_REQUEST);
             }
+
             // Verifica si el número de teléfono ya existe en la base de datos
             $existingPhoneUser = $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(['Phone' => $Usuario->getPhone()]);
 
             // Si el número de teléfono ya existe, devuelve un mensaje de error
             if ($existingPhoneUser) {
-                return new JsonResponse(['error' => 'El número de teléfono pertenece a un usuario '], JsonResponse::HTTP_BAD_REQUEST);
+                return new JsonResponse(['error' => 'El número de teléfono ya está en uso'], JsonResponse::HTTP_BAD_REQUEST);
             }
+
             // Obtener el EntityManager para interactuar con la base de datos
             $em = $this->getDoctrine()->getManager();
 
@@ -92,9 +94,9 @@ class UsuarioController extends AbstractController
             $this->addFlash('success', 'El usuario ha sido creado exitosamente');
             return new JsonResponse(['status' => 'Usuario creado exitosamente'], JsonResponse::HTTP_CREATED);
         }
+
         // Si los datos del formulario no son válidos, devuelve un mensaje de error
         return new JsonResponse(['error' => 'Los datos del usuario no son válidos'], JsonResponse::HTTP_BAD_REQUEST);
-
     }
 
     //-------------------------------------------------
