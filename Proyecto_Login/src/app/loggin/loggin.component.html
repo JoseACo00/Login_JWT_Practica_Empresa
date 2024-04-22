@@ -10,7 +10,7 @@
 <body >
 
   <div class="FormLogin">
-    <form [formGroup]="FormLogin" (ngSubmit)="procesar()">
+    <form [formGroup]="FormLogin" (ngSubmit)="onLogin2()">
        <h1>Loggin</h1>
 
       <div class="mb-5 form-check">
@@ -22,7 +22,7 @@
       </div>
 
       <div class="mb-5 form-check">
-        <i class='bx bx-lock'></i> 
+        <i class='bx bx-lock'></i>
         <input type="password" class="form-control" placeholder="Introducir la contraseña" formControlName="password" required="">
        <!-- icono del passsword-->
         <span class="alertas">
@@ -30,7 +30,7 @@
           <div *ngIf="FormLogin.get('password')?.touched && FormLogin.get('password')?.errors?.['minlength']" class="alert ">El password debe ser minimo de 6 Caracteres</div>
           <div *ngIf="FormLogin.get('password')?.touched && FormLogin.get('password')?.errors?.['maxlength']" class="alert ">El password debe tener maximo 30 Caracteres</div>
         </span>
-        
+
       </div>
 
       <div class="recordar">
