@@ -2,44 +2,59 @@
 
     namespace App\Controller;
     
-    use App\Entity\Usuario;
+use App\Entity\Usuario;
+
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Routing\Annotation\Route;
+    use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
     class LoginController extends AbstractController
     {
-        private $jwtManager;
 
-//       public function __construct(JWTTokenManagerInterface $jwtManager)
-//       {
-//           $this->jwtManager = $jwtManager;
-//       }
+        private $jwtEncoder;
+
+        public function __construct(JWTEncoderInterface $jwtEncoder)
+        {
+            $this->jwtEncoder = $jwtEncoder;
+        }
 
         #[Route('/login', name: 'app_login', methods: ['POST'])]
-        public function login(Request $request, AuthenticationUtils $authenticationUtils): JsonResponse
+        public function login(Request $request): JsonResponse
         {
-            // Obtener el error de autenticación (si lo hay) y el último nombre de usuario intentado
-            $error = $authenticationUtils->getLastAuthenticationError();
-            $lastUsername = $authenticationUtils->getLastUsername();
+            // Obtener los datos del cuerpo de la solicitud
+            $data = json_decode($request->getContent(), true);
 
-            // Verificar si hay un error de autenticación
-            if ($error) {
-                return new JsonResponse(['error' => 'Invalid credentials'], JsonResponse::HTTP_UNAUTHORIZED);
+            // Obtener el correo electrónico y la contraseña del cuerpo de la solicitud
+            $email = $data['email'] ?? null;
+            $password = $data['password'] ?? null;
+
+            // Verificar si el correo electrónico y la contraseña están presentes
+            if (!$email || !$password) {
+                return new JsonResponse(['error' => 'Email and password are required'], JsonResponse::HTTP_BAD_REQUEST);
             }
 
-            // Obtener el usuario autenticado
-            $user = $this->getUser();
+            // Buscar el usuario por su correo electrónico en la base de datos
+            $Usuario = $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(['Email' => $email]);
 
-            // Verificar si el usuario existe
-           if (!$user) {
-                return new JsonResponse(['error' => 'User not found'], JsonResponse::HTTP_NOT_FOUND);
+            // Verificar si el usuario existe y si la contraseña es válida
+            if (!$Usuario) {
+                return new JsonResponse(['error' => 'Invalid email'], JsonResponse::HTTP_UNAUTHORIZED);
             }
 
-           // Generar el token JWT utilizando el servicio JWTTokenManagerInterface
-           $token = $this->jwtManager->create($user);
+
+            // Crear un array de datos del usuario para incluir en el token JWT
+            $userData = [
+                'email' => $Usuario->getEmail(),
+                // Otros datos del usuario que quieras incluir en el token
+            ];
+
+            // Generar el token JWT
+            $token = $this->jwtEncoder->encode($userData);
 
             // Devolver el token JWT en la respuesta
             return new JsonResponse(['token' => $token]);

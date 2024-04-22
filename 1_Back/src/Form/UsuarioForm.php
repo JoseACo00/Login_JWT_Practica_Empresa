@@ -82,7 +82,8 @@ class UsuarioForm extends AbstractType
     public function  ConfigureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Usuario::class
+            'data_class' => Usuario::class,
+            'csrf_protection' => false, //NECESARIO SI IMPORATAMOS EL MAKEBULDER MAKE BUILDER
         ]);
     }
 }

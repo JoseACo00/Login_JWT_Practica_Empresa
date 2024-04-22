@@ -12,42 +12,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 class UsuarioController extends AbstractController
 {
+    private $usuarioRepository;
 
-
-    //Recive una solicitud REQUEST y siempre devuelve un objeto Response
-    //DENTRO TENDREMOS ACCESO A LOS METODOS POST, GET, HEAD ...
-
-
-    //REQUEST PARA : OBTENER VALORES DEL PARAMETRO GET, POST, SERVIDOR,
-    //OBTNER ARCHIVOS , DATOS DE LAS COOKIES
-
-    //1 recuperar la información
-
-    /*  if($request->getMethod() == "POST"){
-          $name = $request->request->get(name);
-          $email =$request->request->get(email);
-          $phone = $request->request->get(phone);
-
-          if(isset($name) && $name != '');
-
-      }
-
-      return $this->render('usuario/crear_usuario.html.twig'); */
-
-// $em =$this->getDoctrine()->getManager(); // ALmancenar objeto en la base de datos
-
-// $em->persist($Usuario);
-//  $em->flush(); //Procede el sql y lo mete
-
-// COMO METER DEL FROM AL ALGO ...
-
-
-
-
+    public function __construct(UsuarioRepository $usuarioRepository)
+    {
+        $this->usuarioRepository = $usuarioRepository;
+    }
 //CON ESTO GUARDA SE  UN OBJETO EN LA BASE DE DATOS
 
 //Define la ruta del endpoint para crear un nuevo usuario mediante una solicitud POST
@@ -94,9 +68,10 @@ class UsuarioController extends AbstractController
             $this->addFlash('success', 'El usuario ha sido creado exitosamente');
             return new JsonResponse(['status' => 'Usuario creado exitosamente'], JsonResponse::HTTP_CREATED);
         }
-
+        dump($usuarioForm->getErrors());
+        die();
         // Si los datos del formulario no son válidos, devuelve un mensaje de error
-        return new JsonResponse(['error' => 'Los datos del usuario no son válidos'], JsonResponse::HTTP_BAD_REQUEST);
+        //return new JsonResponse(['error' => 'Los datos del usuario no son válidos'], JsonResponse::HTTP_BAD_REQUEST);
     }
 
     //-------------------------------------------------
@@ -136,12 +111,34 @@ class UsuarioController extends AbstractController
      //INSERTAR DATOS
 
     // Declara una propiedad privada para almacenar el repositorio UsuarioRepository
-    private $usuarioRepository;
 
-    public function __construct(UsuarioRepository $usuarioRepository)
-    {
-        $this->usuarioRepository = $usuarioRepository;
-    }
+    //Recive una solicitud REQUEST y siempre devuelve un objeto Response
+    //DENTRO TENDREMOS ACCESO A LOS METODOS POST, GET, HEAD ...
+
+
+    //REQUEST PARA : OBTENER VALORES DEL PARAMETRO GET, POST, SERVIDOR,
+    //OBTNER ARCHIVOS , DATOS DE LAS COOKIES
+
+    //1 recuperar la información
+
+    /*  if($request->getMethod() == "POST"){
+          $name = $request->request->get(name);
+          $email =$request->request->get(email);
+          $phone = $request->request->get(phone);
+
+          if(isset($name) && $name != '');
+
+      }
+
+      return $this->render('usuario/crear_usuario.html.twig'); */
+
+// $em =$this->getDoctrine()->getManager(); // ALmancenar objeto en la base de datos
+
+// $em->persist($Usuario);
+//  $em->flush(); //Procede el sql y lo mete
+
+// COMO METER DEL FROM AL ALGO ...
+
 
 //    /**
 //     * @Route("usuario_add", name="app_usuario", methods={"POST"})
