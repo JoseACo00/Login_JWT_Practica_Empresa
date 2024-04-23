@@ -40,10 +40,14 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
             // Buscar el usuario por su correo electrónico en la base de datos
             $Usuario = $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(['Email' => $email]);
+            $Usuario2 = $this->getDoctrine()->getRepository(Usuario::class)->findOneBy(['Password' => $password]);
 
             // Verificar si el usuario existe y si la contraseña es válida
             if (!$Usuario) {
                 return new JsonResponse(['error' => 'Invalid email'], JsonResponse::HTTP_UNAUTHORIZED);
+                //return  new JsonResponse(['error' => 'Invalid Password'], JsonResponse::HTTP_UNAUTHORIZED);
+            }if (!$Usuario2){
+                return new JsonResponse(['error' => 'Invalid Password'], JsonResponse::HTTP_UNAUTHORIZED);
             }
 
 
