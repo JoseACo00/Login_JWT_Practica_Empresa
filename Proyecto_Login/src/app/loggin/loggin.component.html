@@ -10,7 +10,7 @@
 <body >
 
   <div class="FormLogin">
-    <form [formGroup]="FormLogin" (ngSubmit)="onLogin2()">
+    <form [formGroup]="FormLogin" (ngSubmit)="onLogin021()">
        <h1>Loggin</h1>
 
       <div class="mb-5 form-check">
@@ -34,7 +34,7 @@
       </div>
 
       <div class="recordar">
-          <label> <input type="checkbox">Recuerdame</label>
+          <label> <input type="checkbox"  formControlName="remenberMe" >Recuerdame </label>
           <a href="#">¿Has olvidado la contraseña?</a>
       </div>
 
