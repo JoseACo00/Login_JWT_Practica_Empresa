@@ -4,11 +4,17 @@ import { AppComponent } from './app.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { LogginComponent } from './loggin/loggin.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { LogginGuard } from './guards/login-guard.guard';
 const routes: Routes = [
-  {path: "", component : LogginComponent},
+  {path: "", component
+  : LogginComponent,
+},
   {path:"registrar", component: RegistrarComponent},
   {path: "loggin", component: LogginComponent},
-  {path: "Inicio", component: InicioComponent}
+  {path: "Inicio",
+  component: InicioComponent,
+  canActivate : [LogginGuard]
+}
 ];
 
 @NgModule({

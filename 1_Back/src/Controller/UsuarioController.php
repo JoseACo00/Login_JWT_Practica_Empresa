@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class UsuarioController extends AbstractController
 {
     private $usuarioRepository;
@@ -33,6 +32,7 @@ class UsuarioController extends AbstractController
 
         // Crea una nueva instancia de la entidad Usuario
         $Usuario = new Usuario();
+
 
         // Crea un formulario utilizando UsuarioForm y la nueva instancia de Usuario
         $usuarioForm = $this->createForm(UsuarioForm::class, $Usuario);
@@ -56,6 +56,13 @@ class UsuarioController extends AbstractController
             if ($existingPhoneUser) {
                 return new JsonResponse(['error' => 'El número de teléfono ya está en uso'], JsonResponse::HTTP_BAD_REQUEST);
             }
+
+            // Encriptar la contraseña utilizando password_hash()
+            $hashedPassword = password_hash($Usuario->getPassword(), PASSWORD_DEFAULT);
+            $Usuario->setPassword($hashedPassword);
+
+            // Setear la contraseña
+            //$Usuario->setPassword($passwordEncoder->encodePassword($Usuario, $data["password"]));
 
             // Obtener el EntityManager para interactuar con la base de datos
             $em = $this->getDoctrine()->getManager();
