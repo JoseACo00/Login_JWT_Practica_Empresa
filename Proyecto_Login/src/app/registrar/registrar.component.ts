@@ -2,6 +2,7 @@ import { CreateService } from './../services/create.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-registrar',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class RegistrarComponent  implements OnInit{
 
-  constructor(private fb: FormBuilder, private CreateService: CreateService, private router :Router ) {}
+  constructor(private fb: FormBuilder, private CreateService: CreateService, private router :Router, private notifications: NotificationsService) {}
 
   ngOnInit(): void {
 
@@ -28,6 +29,24 @@ export class RegistrarComponent  implements OnInit{
 procesar() {
   console.log(this.FormCreate.value);
 
+}
+
+//ALERTAS
+onSuccess(message: string) {
+  this.notifications.success('Correcto con padre', message, {
+    position: ['bottom', 'right'],
+    animate: 'fade',
+    showProgressBar: true,
+    timeOut: 2000
+  });
+}
+onError(message: string) {
+  this.notifications.error('Error con padre', message, {
+    position: ["top", "center"], // Configuración de posición
+    animate: 'fade',
+    showProgressBar: true,
+    timeOut: 4000
+  });
 }
 
 //SE ENVIA DATOSA A LA API
@@ -48,12 +67,17 @@ public enviarData2() {
       (response) => {
         console.log('Formulario Enviado:', response);
         // Puedes agregar aquí lógica adicional después de enviar el formulario
+        this.onSuccess('Usuario Creado');
+              setTimeout(()=>{this.router.navigate(['/loggin'])}, 3000);
+        
       },
-      (error) => {
-        console.error('Error al enviar el formulario:', error);
+      (err : any) => {
+       
+        this.onError(err.error.error);
+        console.error('Error al enviar el formulario:', err);
         // Puedes manejar el error aquí, por ejemplo, mostrando un mensaje al usuario
       }
-    ); this.router.navigate(['loggin']);
+    ); 
   }
 //FUNCION PARA ENVIAR LOS DATOS AL ENDPOINT
 //NECESITA ESTAR EL SYMFONY OPEN

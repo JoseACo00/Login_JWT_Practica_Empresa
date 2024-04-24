@@ -2,6 +2,8 @@ import { Router } from '@angular/router';
 import { LoginService } from './../services/Loggin/login.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-loggin',
@@ -12,7 +14,7 @@ export class LogginComponent {
 
   mensaje="El campo es obligatorio"; // ESTO SIRVE PARA LA INTERPOLACIÓN
 
-  constructor(private fb: FormBuilder, private LoginService:LoginService, private router: Router){
+  constructor(private fb: FormBuilder, private LoginService:LoginService, private router: Router, private notifications: NotificationsService ){
     // this.FormLogin = new FormGroup({
     //   email: new FormControl(''),
     //   password: new FormControl(''),
@@ -29,6 +31,26 @@ export class LogginComponent {
     console.log(this.FormLogin.value);
   }
 
+  //ALERTAS
+  onSuccess(message: string) {
+    this.notifications.success('Correcto con padre', message, {
+      position: ['bottom', 'right'],
+      
+      animate: 'fade',
+      showProgressBar: true,
+      timeOut: 2000
+    });
+  }
+  onError(message: string) {
+    this.notifications.error('Error con padre', message, {
+      position: ["top", "center"], // Configuración de posición
+      animate: 'fade',
+      showProgressBar: true,
+      timeOut: 4000
+    });
+  }
+ 
+  
 
   // public LogOk(){
   //   	this.LoginService.Login(this.FormLogin.value)
@@ -78,18 +100,18 @@ export class LogginComponent {
               } else {
                 sessionStorage.setItem('TokenJWT', res.token);
               }
-              alert('Inicio de sesión exitoso');
-              this.router.navigate(['/Inicio']); // Redirige a la página principal después del inicio de sesión
+              this.onSuccess('Inicio de sesión exitoso');
+              setTimeout(()=>{this.router.navigate(['/Inicio'])}, 2000); // Redirige a la página principal después del inicio de sesión
             } else {
-              alert('Credenciales inválidas');
+              this.onError('Credenciales inválidas');
             }
           },
-          (error: { message: string; }) => {
-            alert('Error en la solicitud: ' + error.message);
+          (error: any) => {
+            this.onError(error.error.error);
           }
         );
     } else {
-      alert('Por favor, completa todos los campos del formulario.');
+      this.onError('Por favor, completa todos los campos del formulario.');
     }
   }
 

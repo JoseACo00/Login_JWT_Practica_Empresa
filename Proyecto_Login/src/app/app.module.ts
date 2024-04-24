@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+
 //INICIO DE SERVICIOS
 
 
@@ -19,7 +22,8 @@ import { InicioComponent } from './inicio/inicio.component';
     LogginComponent,
     BannerComponent,
     RegistrarComponent,
-    InicioComponent
+    InicioComponent,
+    
 
   ],
   imports: [
@@ -28,6 +32,9 @@ import { InicioComponent } from './inicio/inicio.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule, 
+    SimpleNotificationsModule.forRoot()
+    
 
 
   ],
