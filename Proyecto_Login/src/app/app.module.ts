@@ -12,6 +12,8 @@ import { RegistrarComponent } from './registrar/registrar.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { CambiarPasswordComponent } from './cambiar-password/cambiar-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 //INICIO DE SERVICIOS
 
@@ -23,6 +25,8 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     BannerComponent,
     RegistrarComponent,
     InicioComponent,
+    CambiarPasswordComponent,
+    ResetPasswordComponent,
     
 
   ],
