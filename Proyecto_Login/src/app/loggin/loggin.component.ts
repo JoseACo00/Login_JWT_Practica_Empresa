@@ -34,9 +34,8 @@ export class LogginComponent {
   //ALERTAS
   onSuccess(message: string) {
     this.notifications.success('Correcto con padre', message, {
-      position: ['bottom', 'right'],
-      
-      animate: 'fade',
+      position: ['top', 'middle'],
+      animate: 'fromRight',
       showProgressBar: true,
       timeOut: 2000
     });
@@ -44,13 +43,13 @@ export class LogginComponent {
   onError(message: string) {
     this.notifications.error('Error con padre', message, {
       position: ["top", "center"], // Configuración de posición
-      animate: 'fade',
+      animate: 'fromTop',
       showProgressBar: true,
       timeOut: 4000
     });
   }
- 
-  
+
+
 
   // public LogOk(){
   //   	this.LoginService.Login(this.FormLogin.value)

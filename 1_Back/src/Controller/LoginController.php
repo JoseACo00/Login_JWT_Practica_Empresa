@@ -85,12 +85,12 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
         // Verificar si el usuario existe
         if (!$usuario) {
-            return new JsonResponse(['error' => 'Invalid email'], JsonResponse::HTTP_UNAUTHORIZED);
+            return new JsonResponse(['error' => 'El correo es invalido'], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
         // Verificar si la contraseña proporcionada coincide con la contraseña almacenada
         if (!password_verify($password, $usuario->getPassword())) {
-            return new JsonResponse(['error' => 'Invalid password'], JsonResponse::HTTP_UNAUTHORIZED);
+            return new JsonResponse(['error' => 'El password no es el correcto'], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
         // Crear un array de datos del usuario para incluir en el token JWT

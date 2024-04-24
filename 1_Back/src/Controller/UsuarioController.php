@@ -46,7 +46,7 @@ class UsuarioController extends AbstractController
 
             // Si el correo electrónico ya existe, devuelve un mensaje de error
             if ($existingEmailUser) {
-                return new JsonResponse(['error' => 'El correo electrónico ya está en uso'], JsonResponse::HTTP_BAD_REQUEST);
+                return new JsonResponse(['error' => 'El correo electrónico ya está en uso otro Usaurio'], JsonResponse::HTTP_BAD_REQUEST);
             }
 
             // Verifica si el número de teléfono ya existe en la base de datos
@@ -54,7 +54,7 @@ class UsuarioController extends AbstractController
 
             // Si el número de teléfono ya existe, devuelve un mensaje de error
             if ($existingPhoneUser) {
-                return new JsonResponse(['error' => 'El número de teléfono ya está en uso'], JsonResponse::HTTP_BAD_REQUEST);
+                return new JsonResponse(['error' => 'El número de teléfono ya está en uso por otro Usaurio'], JsonResponse::HTTP_BAD_REQUEST);
             }
 
             // Encriptar la contraseña utilizando password_hash()
