@@ -25,6 +25,9 @@ class Usuario
     #[ORM\Column(length: 255)]
     private ?string $Password = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $reset_password = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Usuario
     public function setPassword(string $Password): static
     {
         $this->Password = $Password;
+
+        return $this;
+    }
+
+    public function getResetPassword(): ?string
+    {
+        return $this->reset_password;
+    }
+
+    public function setResetPassword(?string $reset_password): static
+    {
+        $this->reset_password = $reset_password;
 
         return $this;
     }
