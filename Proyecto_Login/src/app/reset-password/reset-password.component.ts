@@ -1,5 +1,11 @@
+import { ChangePasswordService } from './../services/ChangePassword/change-password.service';
+
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
+import { ActivatedRoute } from '@angular/router'; //PARA ACCEDERA  LA URL (COGER EL TOKEN)
+
 
 @Component({
   selector: 'app-reset-password',
@@ -9,55 +15,114 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ResetPasswordComponent {
 
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private router: Router, private notifications: NotificationsService, private ChangePasswordService:ChangePasswordService, private activatedRoute: ActivatedRoute){
 
   }
 
   FormChangePassword= this.fb.group({
-
     'password': ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
     'confirmPassword': ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
   },
-  {
-    validator: this.validarPassword.bind(this) // Usar bind para mantener el contexto de this
-  }
+
 );
 
-  progresar(){
-    console.log(this.FormChangePassword.value);
+
+  //MENSJASES
+  onError(message: string) {
+    this.notifications.error('Error con Caballer@', message, {
+      position: ["top", "center"], // Configuración de posición
+      animate: 'fromTop',
+      showProgressBar: true,
+      timeOut: 4000
+    });
   }
 
-  //VERIFICAR QUE LAS CONTRASEÑAS SE HAN IGUALES
+  onSucces(message: string) {
+    this.notifications.success('Bien Caballer@', message, {
+      position: ["top", "center"], // Configuración de posición
+      animate: 'fromTop',
+      showProgressBar: true,
+      timeOut: 4000
+    });
+  }
 
-  // public validarPassword(){
-  //   return this.FormChangePassword.get('password')?.value==this.FormChangePassword.get('confirmPassword')?.value?
-  //   null:
-  //   {'missmatch': true}
-  //   console.log(this.FormChangePassword.value);
-  // }
 
-  public validarPassword(formGroup: FormGroup) {
-    const password = formGroup.get('password')?.value;
-    const confirmPassword = formGroup.get('confirmPassword')?.value;
 
-    // Verificar si las contraseñas coinciden
-    const coincidenPassword = password === confirmPassword;
+  public validPassword() {
+    const password = this.FormChangePassword.get('password')?.value;
+    const confirmPassword = this.FormChangePassword.get('confirmPassword')?.value;
 
-    // Si las contraseñas coinciden, mostrar el mensaje de éxito y los valores en la consola
-    if (coincidenPassword) {
-      console.log('Las contraseñas coinciden:');
-      console.log('Password:', password);
-      console.log('Confirm Password:', confirmPassword);
-      return null;
+    // Verificar si las contraseñas son iguales
+    if (password === confirmPassword) {
+      this.onSucces ( 'SON IGUALES PERRO'); // Las contraseñas coinciden, no hay error
     } else {
-      // Si las contraseñas no coinciden, mostrar un mensaje de error en la consola
-      console.error('Las contraseñas no coinciden:');
-      console.error('Password:', password);
-      console.error('Confirm Password:', confirmPassword);
-
-      // Devolver un objeto con el error 'coincidenPassword'
-      return { 'missmatch': true };
+      this.onError ('Las contraseñas no coinciden'); // Las contraseñas no coinciden, mostrar mensaje de error
     }
+  }
+
+  // Método para enviar la solicitud de cambio de contraseña al backend Symfony
+  public changePassword() {
+    const password = this.FormChangePassword.get('password')?.value;
+    const confirmPassword = this.FormChangePassword.get('confirmPassword')?.value;
+
+    // Verificar si las contraseñas son iguales
+    if (password === confirmPassword) {
+      // Llamar al servicio para cambiar la contraseña
+      const token = this.activatedRoute.snapshot.queryParams['token'];
+
+
+      const newPasswordData = { password: password };
+
+      this.ChangePasswordService.changePassword(token, newPasswordData).subscribe(
+        (response) => {
+          // Contraseña cambiada con éxito
+          this.onSucces('Contraseña cambiada correctamente');
+          // Redirigir a alguna página de éxito o a la página de inicio de sesión
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+          // Ocurrió un error al cambiar la contraseña
+          this.onError('Error al cambiar la contraseña. Por favor, inténtalo de nuevo más tarde.');
+        }
+      );
+    } else {
+      // Las contraseñas no coinciden
+      this.onError('Las contraseñas no coinciden');
+    }
+  }
+
+
+  public changePassword01() {
+    // Validar las contraseñas
+    this.validPassword();
+
+    // Verificar si hubo errores de validación previos
+    if (this.FormChangePassword.invalid) {
+      return;
+    }
+
+    // Se obtienee  el token de la URL  utilizando el   ActivatedRoute
+    const token = this.activatedRoute.snapshot.queryParams['token'];
+
+    // Obtener la nueva contraseña del formulario
+    const password = this.FormChangePassword.get('password')?.value;
+
+    // Llamar al servicio para cambiar la contraseña
+    const newPasswordData = { password: password };
+
+    this.ChangePasswordService.changePassword(token, newPasswordData).subscribe(
+      (response) => {
+        // Contraseña cambiada con éxito
+        this.onSucces('Contraseña cambiada correctamente');
+        // Redirigir a alguna página de éxito o a la página de inicio de sesión
+        this.router.navigate(['/loggin']);
+      },
+      (error:any) => {
+        this.onError(error.error.error);
+        // Ocurrió un error al cambiar la contraseña
+        this.onError('Error al cambiar la contraseña. Por favor, inténtalo de nuevo más tarde.');
+      }
+    );
   }
 
 }
