@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 
 import { LogginComponent } from './loggin/loggin.component';
 import { BannerComponent } from './banner/banner.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { InicioComponent } from './inicio/inicio.component';
@@ -14,8 +14,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { CambiarPasswordComponent } from './cambiar-password/cambiar-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 //INICIO DE SERVICIOS
+
+export function  httpLoaderFactory(http: HttpClient){
+  return new  TranslateHttpLoader(http);
+}
 
 
 @NgModule({
@@ -27,18 +33,25 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     InicioComponent,
     CambiarPasswordComponent,
     ResetPasswordComponent,
-    
+
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient],
+      }
+    }),
     ReactiveFormsModule,
     FormsModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot()
-    
+
 
 
   ],

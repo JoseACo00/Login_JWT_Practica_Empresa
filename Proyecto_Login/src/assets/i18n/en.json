@@ -1,0 +1,35 @@
+{
+  "login": {
+    "rememberMe": "Remember me",
+    "Login":"Login",
+    "forgotPassword": "Forgot your password?",
+    "noAccount": "Don't have an account with us?",
+    "register": "Register",
+    "Placeholder01": "Enter the email",
+    "Placeholder02": "Enter the password"
+  },
+
+  "register": {
+    "registerTitle": "Register",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "phone": "Phone",
+    "alreadyHaveAccount": "Already have an account?",
+    "starSession": "  Start session",
+    "buttton": "Register"
+  },
+
+  "Reset_Password": {
+    "titleReset": "Resert the password",
+    "RegisterButton": "Register",
+    "Placeholder01": "Enter the email of your associated account"
+  },
+
+  "changePassword": {
+    "titleChangePassword": "Change the password",
+    "Placeholder01": "New password",
+    "Placeholder02": "Confirm the password",
+    "Button1": "Change password"
+    }
+}

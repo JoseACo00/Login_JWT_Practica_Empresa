@@ -1,0 +1,38 @@
+{
+  "login": {
+    "rememberMe": "Recuérdame",
+    "forgotPassword": "¿Has olvidado la contraseña?",
+    "Login": "Acceder",
+    "noAccount": "¿No tienes una cuenta con nosotros?",
+    "register": "Registrarse",
+    "Placeholder01": "Introduce el correo",
+    "Placeholder02": "Introduce la contraseña"
+  },
+
+  "register":{
+    "registerTitle": "Regístrate",
+    "name": "Nombre",
+    "email": "Email",
+    "password": "Contraseña",
+    "phone": "Teléfono",
+    "alreadyHaveAccount": "¿Ya tienes cuenta?",
+    "starSession": "  Inicia Sesion",
+    "buttton": "Registrarse"
+  },
+
+  "Reset_Password": {
+    "titleReset": "Recuperar la contraseña",
+    "RegisterButton": "Registrarse",
+    "Placeholder01": "Escribe el email de tu cuenta asociada"
+  },
+
+  "changePassword": {
+    "titleChangePassword": "Cambiar la contraseña",
+    "Placeholder01": "Nueva contraseña",
+    "Placeholder02": "Confirmar la contraseña",
+    "Button1": "Cambiar contraseña"
+
+  }
+
+}
+

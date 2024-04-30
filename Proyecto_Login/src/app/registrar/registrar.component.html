@@ -11,9 +11,9 @@
 
   <div class="createForm">
     <form [formGroup]="FormCreate" (ngSubmit)="enviarData2()">
-      <h1>Registrate</h1>
+      <h1>{{"register.registerTitle" | translate}}</h1>
   <div class="mb-5 form-check">
-      <label for="name" class="form-label">Nombre</label>
+      <label for="name" class="form-label">{{"register.name" | translate}}</label>
       <input type="text" class="form-control" id="name" name="name" formControlName="name" placeholder="">
       <div *ngIf="FormCreate.get('name')?.touched && FormCreate.get('name')?.errors?.['required']" class="alert ">Este campo es requerido</div>
       <div *ngIf="FormCreate.get('name')?.touched && FormCreate.get('name')?.errors?.['hasNumbers']" class="alert ">El nombre no puede contener números</div>
@@ -23,7 +23,7 @@
   </div>
 
   <div class="mb-5 form-check">
-      <label for="email" class="form-label">Email</label>
+      <label for="email" class="form-label">{{"register.email" | translate}}</label>
       <input type="email" class="form-control" id="email" name="email" formControlName="email">
       <div *ngIf="FormCreate.get('email')?.touched && FormCreate.get('email')?.errors?.['required']" class="alert ">Este campo es requerido</div>
       <div *ngIf="FormCreate.get('email')?.touched && FormCreate.get('email')?.errors?.['pattern']" class="alert ">El email debe tener un formato correcto ej:Rmd14@gmail.es</div>
@@ -31,7 +31,7 @@
   </div>
 
   <div class="mb-5 form-check">
-      <label for="password" class="form-label">Password</label>
+      <label for="password" class="form-label">{{"register.password" | translate}}</label>
       <input type="password" class="form-control" id="password" name="password" formControlName="password">
       <div *ngIf="FormCreate.get('password')?.touched && FormCreate.get('password')?.errors?.['required']" class="alert ">La contraseña es obligatoria</div>
       <div *ngIf="FormCreate.get('password')?.touched && FormCreate.get('password')?.errors?.['minlength']" class="alert ">El password debe ser minimo de 6 Caracteres</div>
@@ -39,7 +39,7 @@
   </div>
 
   <div class="mb-5 form-check">
-      <label for="phone" class="form-label">Teléfono</label>
+      <label for="phone" class="form-label">{{"register.phone" | translate}}</label>
       <input type="text" class="form-control" id="phone" name="phone" formControlName="phone">
       <div *ngIf="FormCreate.get('phone')?.touched && FormCreate.get('phone')?.errors?.['required']" class="alert ">El teléfono es obligatorio</div>
       <div *ngIf="FormCreate.get('phone')?.touched && FormCreate.get('phone')?.errors?.['minlength']" class="alert ">El teléfono debe tener al menos 6 números</div>
@@ -48,10 +48,10 @@
   </div>
 
   <div class="d-grid gap-2 col-4 float-end">
-      <button type="submit" [disabled]="FormCreate.invalid"  class="btn" (click)="enviarData2">Registrarse</button>
+      <button type="submit" [disabled]="FormCreate.invalid"  class="btn" (click)="enviarData2">{{"register.buttton" | translate}}</button>
   </div>
   <div class="user-loggin">
-    <p>¿Ya tienes cuenta?<a href="loggin">  Inicia sesión</a></p>
+    <p>{{"register.alreadyHaveAccount" | translate}}<a href="loggin">{{"register.starSession" | translate}} </a></p>
   </div>
 </form>
 </div>

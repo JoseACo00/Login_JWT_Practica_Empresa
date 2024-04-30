@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 import { timeout } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-loggin',
@@ -12,9 +13,10 @@ import { timeout } from 'rxjs';
 })
 export class LogginComponent {
 
+
   mensaje="El campo es obligatorio"; // ESTO SIRVE PARA LA INTERPOLACIÓN
 
-  constructor(private fb: FormBuilder, private LoginService:LoginService, private router: Router, private notifications: NotificationsService ){
+  constructor(private fb: FormBuilder, private LoginService:LoginService, private router: Router, private notifications: NotificationsService, private translate: TranslateService){
     // this.FormLogin = new FormGroup({
     //   email: new FormControl(''),
     //   password: new FormControl(''),
@@ -29,6 +31,10 @@ export class LogginComponent {
 
   procesar(){
     console.log(this.FormLogin.value);
+  }
+
+  switchLanguage(language: string){
+    this.translate.use(language);
   }
 
   //ALERTAS

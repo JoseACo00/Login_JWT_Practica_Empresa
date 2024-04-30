@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateServiceService } from '../services/TranslateService/translate-service.service';
 
 @Component({
   selector: 'app-banner',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class BannerComponent {
 
+  constructor(private translateService: TranslateServiceService){
+
+  }
+  cambiarIdioma(language: string) {
+    this.translateService.switchLanguage(language);
+  }
 }

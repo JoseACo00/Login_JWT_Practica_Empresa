@@ -15,7 +15,7 @@
 
       <div class="mb-5 form-check">
         <i class='bx bx-envelope'></i>
-        <input type="email" class="form-control" placeholder="Introducir el email" name="email" formControlName="email" required>
+        <input type="email" class="form-control" name="email" formControlName="email" required [placeholder]="'login.Placeholder01' | translate">
         <div *ngIf="FormLogin.get('email')?.touched && FormLogin.get('email')?.errors?.['required']" class="alert ">Este campo es requerido</div>
         <div *ngIf="FormLogin.get('email')?.touched && FormLogin.get('email')?.errors?.['pattern']" class="alert ">El email debe tener un formato correcto ej:Rmd14@gmail.es</div>
          <!-- Icono del correo -->
@@ -23,7 +23,7 @@
 
       <div class="mb-5 form-check">
         <i class='bx bx-lock'></i>
-        <input type="password" class="form-control" placeholder="Introducir la contraseña" formControlName="password" required="">
+        <input type="password" class="form-control" [placeholder]="'login.Placeholder02' | translate"formControlName="password" required="">
        <!-- icono del passsword-->
         <span class="alertas">
           <div *ngIf="FormLogin.get('password')?.touched && FormLogin.get('password')?.errors?.['required']" class="alert ">La contraseña es obligatoria</div>
@@ -34,14 +34,19 @@
       </div>
 
       <div class="recordar">
-          <label> <input type="checkbox"  formControlName="remenberMe" >Recuerdame </label>
-          <a href="cambiar-password">¿Has olvidado la contraseña?</a>
+          <!-- <label> <input type="checkbox"  formControlName="remenberMe" >{{"login.rememberMe" | translate}} </label> -->
+          <label>
+            <input type="checkbox" formControlName="rememberMe">
+            {{ 'login.rememberMe' | translate }}
+          </label>
+
+          <a href="cambiar-password">{{"login.forgotPassword" | translate}}</a>
       </div>
 
-      <button  class="btn"  type="submit" (click)="onLogin021" >Acceder</button>
-      
+      <button  class="btn"  type="submit" (click)="onLogin021" >{{"login.Login" | translate}}</button>
+
       <div class="registarse-link">
-        <p>¿No tienes una cuenta con nosotros? <a href="registrar">Registrarse</a></p>
+        <p>{{"login.noAccount" | translate}} <a href="registrar">{{"login.register" | translate}}</a></p>
       </div>
 
     </form>
