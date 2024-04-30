@@ -9,6 +9,10 @@
     "Placeholder02": "Introduce la contraseña"
   },
 
+  "loginAlert":{
+    "CorrectSession": "Inicio de sesion correcto",
+    "BadError": "Las credenciales son erroneas"
+  },
   "register":{
     "registerTitle": "Regístrate",
     "name": "Nombre",

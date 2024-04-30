@@ -105,8 +105,12 @@ export class LogginComponent {
               } else {
                 sessionStorage.setItem('TokenJWT', res.token);
               }
-              this.onSuccess('Inicio de sesión exitoso');
-              setTimeout(()=>{this.router.navigate(['/Inicio'])}, 2000); // Redirige a la página principal después del inicio de sesión
+              this.translate.get('loginAlert.CorrectSession').subscribe((translation: string) => {
+                this.onSuccess(translation);
+                setTimeout(()=>{this.router.navigate(['/Inicio'])}, 2000); // Redirige a la página principal después del inicio de sesión
+            });
+              // this.onSuccess('Inicio de sesión exitoso');
+              // setTimeout(()=>{this.router.navigate(['/Inicio'])}, 2000); // Redirige a la página principal después del inicio de sesión
             } else {
               this.onError('Credenciales inválidas');
             }

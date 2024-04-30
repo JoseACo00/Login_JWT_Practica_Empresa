@@ -9,6 +9,11 @@
     "Placeholder02": "Enter the password"
   },
 
+  "loginAlert":{
+    "CorrectSession": "Successful login",
+    "BadError": "Credential wrong"
+  },
+
   "register": {
     "registerTitle": "Register",
     "name": "Name",
