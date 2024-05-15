@@ -134,5 +134,87 @@ body {
 }
 
 
+header {
+  width:100%; /* Establecemos que el header abarque el 100% del documento */
+  overflow:hidden; /* Eliminamos errores de float */
+  background:#252932;
+  margin-bottom:20px;
+  }
+
+  .banner {
+  width:100%; /* Establecemos que el ancho sera del 90% */
+  max-width:100%; /* Aqui le decimos que el ancho máximo sera de 1000px */
+    padding: 0 5%;
+  margin:auto; /* Centramos los elementos */
+  overflow:hidden; /* Eliminamos errores de float */
+  }
+
+  header .logo {
+  color:#f2f2f2;
+  font-size:50px;
+  line-height:200px;
+  float:left;
+  }
+
+  header nav {
+  float:right;
+  line-height:200px;
+  }
+
+  header nav a {
+  display:inline-block;
+  color:#fff;
+  text-decoration:none;
+  padding:10px 20px;
+  line-height:normal;
+  font-size:20px;
+  font-weight:bold;
+    cursor: pointer;
+  -webkit-transition:all 500ms ease;
+  -o-transition:all 500ms ease;
+  transition:all 500ms ease;
+  }
+
+  header nav a:hover {
+  background:#b41dcb;
+  border-radius:50px;
+  }
+
+  .idiomas {
+    position: relative;
+  }
+
+  .idiomas .dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #252932;
+    border: 2px solid #fff;
+    border-top: none;
+    display: none;
+  }
+
+  .idiomas .dropdown li {
+    list-style-type: none;
+  }
+
+  .idiomas .dropdown li a {
+    display: block;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+  }
+
+  .idiomas .dropdown li a:hover {
+    background-color: #b41dcb;
+  }
+
+  .idiomas:hover .dropdown {
+    display: block;
+  }
+
+  .idiomas .selected {
+    display: inline-block;
+  }
 
 

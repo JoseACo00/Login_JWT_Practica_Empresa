@@ -7,6 +7,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { LogginGuard } from './guards/login-guard.guard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { CambiarPasswordComponent } from './cambiar-password/cambiar-password.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
   {path: "", component
   : LogginComponent,
@@ -18,7 +19,8 @@ const routes: Routes = [
   canActivate : [LogginGuard]
 },
   {path: "reset-password", component : ResetPasswordComponent},
-  {path: "cambiar-password", component : CambiarPasswordComponent}
+  {path: "cambiar-password", component : CambiarPasswordComponent},
+  {path: '**', component : NotFoundComponent}
 ];
 
 @NgModule({

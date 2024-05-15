@@ -77,7 +77,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
         // Verificar si el correo electrónico y la contraseña están presentes
         if (!$email || !$password) {
-            return new JsonResponse(['error' => 'Email and password are required'], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(['error' => 'Email y el  password son obligatorios'], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         // Buscar el usuario por su correo electrónico en la base de datos

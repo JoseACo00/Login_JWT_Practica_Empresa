@@ -14,9 +14,16 @@
                 <img src="/assets/image/Logo.jpg" >
             </div>
 			<nav>
-				<a href="#">Inicio</a>
-				<a href="#">Sobre Nosotros</a>
-                <a (click)="logOut2()">Salir </a>
+        <a href="#">{{"banner.Home" | translate}}</a>
+				<a href="#">{{"banner.AboutUs" | translate}}</a>
+        <span class="idiomas">
+          <a  class="selected"> {{"banner.Language" | translate}} </a>
+          <ul class="dropdown">
+            <li><a  class="pruebao" (click)="cambiarIdioma('pruebao')">Español</a></li>
+            <li><a class="en" (click)="cambiarIdioma('en')">English</a></li>
+          </ul>
+        </span>
+        <a (click)="logOut2()">{{"banner.CloseSession" | translate}} </a>
 			</nav>
 		</div>
 	</header>

@@ -16,6 +16,7 @@ import { CambiarPasswordComponent } from './cambiar-password/cambiar-password.co
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 //INICIO DE SERVICIOS
 
@@ -33,6 +34,7 @@ export function  httpLoaderFactory(http: HttpClient){
     InicioComponent,
     CambiarPasswordComponent,
     ResetPasswordComponent,
+    NotFoundComponent,
 
 
   ],
