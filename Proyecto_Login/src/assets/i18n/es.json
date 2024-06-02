@@ -11,8 +11,7 @@
 
   "loginAlert":{
     "CorrectSession": "Inicio de sesion correcto",
-    "BadError": "Las credenciales son erroneas",
-    "CompleteAll": "Completa todos los campos"
+    "BadError": "Las credenciales son erroneas"
   },
   "register":{
     "registerTitle": "Regístrate",
@@ -26,11 +25,9 @@
   },
 
   "Reset_Password": {
-    "mesage": {
-      "titleReset": "Recuperar la contraseña",
-      "RegisterButton": "Registrarse",
-      "Placeholder01": "Escribe el email de tu cuenta asociada"
-    }
+    "titleReset": "Recuperar la contraseña",
+    "RegisterButton": "Registrarse",
+    "Placeholder01": "Escribe el email de tu cuenta asociada"
   },
 
   "changePassword": {

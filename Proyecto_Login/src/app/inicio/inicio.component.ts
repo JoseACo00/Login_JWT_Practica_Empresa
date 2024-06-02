@@ -1,9 +1,7 @@
-
 import { animate } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
-import { TranslateServiceService } from '../services/TranslateService/translate-service.service';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -12,7 +10,7 @@ import { TranslateServiceService } from '../services/TranslateService/translate-
 export class InicioComponent {
 
 
-  constructor(private router: Router, private notifications: NotificationsService, private translateService: TranslateServiceService){
+  constructor(private router: Router, private notifications: NotificationsService){
 
   }
 
@@ -40,9 +38,6 @@ export class InicioComponent {
   }
 //-----------------------------------------------------------------
 
-cambiarIdioma(language: string){
-  this.translateService.switchLanguage(language);
-}
 
 // MENSAJES DE ERROR
 //-----------------------------------------------------------------

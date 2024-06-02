@@ -33,7 +33,7 @@ export class LogginComponent {
     console.log(this.FormLogin.value);
   }
 
-  cambiarIdioma(language: string){
+  switchLanguage(language: string){
     this.translate.use(language);
   }
 
@@ -105,32 +105,22 @@ export class LogginComponent {
               } else {
                 sessionStorage.setItem('TokenJWT', res.token);
               }
-              //CAMBIAR POR UN INSTANT LOS ALERTS
-              //this.translate.instant(
-
-              //SIEMPRE que sn
-              const translation = this.translate.instant('loginAlert.CorrectSession');
-              this.onSuccess(translation);
-              setTimeout(() => {
-                  this.router.navigate(['/Inicio']);
-              }, 2000);
-
+              this.translate.get('loginAlert.CorrectSession').subscribe((translation: string) => {
+                this.onSuccess(translation);
+                setTimeout(()=>{this.router.navigate(['/Inicio'])}, 2000); // Redirige a la página principal después del inicio de sesión
+            });
               // this.onSuccess('Inicio de sesión exitoso');
               // setTimeout(()=>{this.router.navigate(['/Inicio'])}, 2000); // Redirige a la página principal después del inicio de sesión
             } else {
-              const translation = this.translate.instant('loginAlert.BadError');
-              this.onError(translation);
+              this.onError('Credenciales inválidas');
+            }
+          },
+          (error: any) => {
+            this.onError(error.error.error);
           }
-
-
-          }
-          // (error: any) => {
-          //   this.onError(error.error.error);
-          // }
         );
     } else {
-      const translate = this.translate.instant('loginAlert.CompleteAll');
-      this.onError(translate);
+      this.onError('Por favor, completa todos los campos del formulario.');
     }
   }
 

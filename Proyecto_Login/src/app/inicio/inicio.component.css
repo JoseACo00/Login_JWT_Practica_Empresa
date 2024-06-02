@@ -3,7 +3,7 @@
     padding: 0;
     border: 0;
     font-size: 100%;
-
+    
 }
 
 body {
@@ -54,42 +54,4 @@ header nav a {
 header nav a:hover {
 	background:#b41dcb;
 	border-radius:50px;
-}
-
-
-.idiomas {
-  position: relative;
-}
-
-.idiomas .dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #252932;
-  border: 2px solid #fff;
-  border-top: none;
-  display: none;
-}
-
-.idiomas .dropdown li {
-  list-style-type: none;
-}
-
-.idiomas .dropdown li a {
-  display: block;
-  color: #fff;
-  padding: 10px 20px;
-  text-decoration: none;
-}
-
-.idiomas .dropdown li a:hover {
-  background-color: #b41dcb;
-}
-
-.idiomas:hover .dropdown {
-  display: block;
-}
-
-.idiomas .selected {
-  display: inline-block;
 }

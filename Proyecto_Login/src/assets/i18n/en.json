@@ -11,8 +11,7 @@
 
   "loginAlert":{
     "CorrectSession": "Successful login",
-    "BadError": "Credential wrong",
-    "CompleteAll": "Complete the inputs please"
+    "BadError": "Credential wrong"
   },
 
   "register": {
@@ -27,11 +26,9 @@
   },
 
   "Reset_Password": {
-    "mesage": {
-      "titleReset": "Resert the password",
-      "RegisterButton": "Register",
-      "Placeholder01": "Enter the email of your associated account"
-    }
+    "titleReset": "Resert the password",
+    "RegisterButton": "Register",
+    "Placeholder01": "Enter the email of your associated account"
   },
 
   "changePassword": {
@@ -39,12 +36,5 @@
     "Placeholder01": "New password",
     "Placeholder02": "Confirm the password",
     "Button1": "Change password"
-    },
-
-    "banner": {
-      "CloseSession": "Close Session",
-      "AboutUs" : "About Us",
-      "Home" : "Home",
-      "Language:" : "Language"
     }
 }

@@ -75,8 +75,8 @@ class UsuarioController extends AbstractController
             $this->addFlash('success', 'El usuario ha sido creado exitosamente');
             return new JsonResponse(['status' => 'Usuario creado exitosamente'], JsonResponse::HTTP_CREATED);
         }
-        //dump($usuarioForm->getErrors());
-       //die();
+        dump($usuarioForm->getErrors());
+        die();
         // Si los datos del formulario no son válidos, devuelve un mensaje de error
         //return new JsonResponse(['error' => 'Los datos del usuario no son válidos'], JsonResponse::HTTP_BAD_REQUEST);
     }
